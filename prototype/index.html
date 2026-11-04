@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Korouhanba Khuman</title>
+<meta name="description" content="Korouhanba Khuman: strategy, AI and product, based in Paris.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&display=swap">
+<style>
+body{margin:0;background:#0b0c0d;color:#ededea;font-family:"Inter Tight","Helvetica Neue",Arial,sans-serif}
+a{color:#ededea;text-decoration:none;transition:opacity 150ms}
+a:hover{opacity:.6}
+.eyebrow{font-size:14px;color:#8d9094;letter-spacing:-.005em}
+.intro{position:fixed;inset:0;z-index:50;background:#0b0c0d;display:flex;align-items:center;justify-content:center;transition:transform 900ms cubic-bezier(.7,0,.2,1),border-radius 900ms}
+.intro.leave{transform:translateY(-100%);border-bottom-left-radius:50% 120px;border-bottom-right-radius:50% 120px}
+.word{font-size:clamp(40px,6vw,72px);font-weight:500;letter-spacing:-.03em;display:flex;align-items:center;gap:18px}
+.word i{width:12px;height:12px;border-radius:9999px;background:#ededea;display:block}
+.tag{position:fixed;left:0;top:0;pointer-events:none;z-index:41;color:#fff;mix-blend-mode:difference;font-size:16px;font-weight:500;letter-spacing:-.02em;white-space:nowrap;transform:translate(-50%,-50%);transition:opacity 250ms}
+.mode-free .tag{opacity:0}
+.slot{position:relative;flex:none;height:470px;display:flex;align-items:flex-end;justify-content:center;perspective:2200px;transition:width 700ms cubic-bezier(.2,.8,.2,1)}
+.b3d{position:relative;border:0;padding:0;background:none;cursor:pointer;transform-style:preserve-3d;transition:transform 700ms cubic-bezier(.2,.8,.2,1);font:inherit}
+.b3d:focus-visible{outline:2px solid #ededea;outline-offset:6px}
+.face{position:absolute;top:0;box-sizing:border-box;backface-visibility:hidden;overflow:hidden}
+.slot::after{content:"";position:absolute;left:6%;right:6%;bottom:-3px;height:8px;background:rgba(0,0,0,.7);filter:blur(5px);z-index:-1}
+.grain{position:absolute;inset:0;width:100%;height:100%;mix-blend-mode:multiply;opacity:.35;pointer-events:none}
+@supports (animation-timeline: view()){
+.rv{animation:rv linear both;animation-timeline:view();animation-range:entry 5% cover 40%}
+@keyframes rv{from{opacity:.08;transform:translateY(56px)}to{opacity:1;transform:none}}
+.drift{animation:drift linear both;animation-timeline:scroll(root);animation-range:0 1400px}
+@keyframes drift{to{transform:translateX(-22%)}}
+}
+@media (hover:none){.tag{display:none}}
+.cue{transform-origin:top;animation:cue 2.4s cubic-bezier(.6,0,.2,1) infinite}
+@keyframes cue{0%{transform:scaleY(0);opacity:1}60%{transform:scaleY(1);opacity:1}100%{transform:scaleY(1);opacity:0}}
+@media (prefers-reduced-motion: reduce){.rv,.drift,.cue{animation:none}.intro{display:none}}
+header,section,footer{max-width:1440px;margin-left:auto;margin-right:auto;box-sizing:border-box}
+.story-row{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:32px}
+.story-row>*{grid-column:4/-1}
+@media (max-width:760px){
+header,section,footer{padding-left:16px !important;padding-right:16px !important}
+.site-head{padding-top:16px !important;padding-bottom:16px !important}
+.site-head .role{display:none}
+.site-head nav{gap:20px !important}
+.site-head a{display:inline-block;padding:10px 0}
+#top{padding-top:56px !important;padding-bottom:56px !important}
+.hero-row{flex-direction:column;align-items:flex-start !important;gap:40px !important;padding-bottom:40px !important}
+.hero-name{font-size:clamp(56px,19vw,96px) !important}
+#story{padding-top:24px !important;padding-bottom:48px !important}
+.story-row{grid-template-columns:1fr !important;padding-bottom:72px !important}
+.story-row>*{grid-column:1/-1 !important}
+.story-row p{max-width:none !important}
+.cue{height:72px !important}
+#work{padding-top:72px !important;padding-bottom:72px !important}
+.work-head{margin-bottom:40px !important}
+.shelf{padding-top:40px !important;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+.shelf-row{zoom:.66;padding:0 24px !important}
+.slot{scroll-snap-align:center}
+.detail-grid{grid-template-columns:1fr !important;row-gap:12px;padding-top:32px !important}
+.detail-grid>*{grid-column:1/-1 !important;justify-content:flex-start !important}
+.detail-grid h3{font-size:32px !important}
+#contact{padding-top:64px !important}
+.talk{margin-bottom:48px !important}
+.foot{grid-template-columns:1fr !important;gap:24px !important}
+.foot a{display:inline-block;padding:6px 0}
+.legal{margin-top:64px !important;flex-wrap:wrap;gap:12px}
+}
+html{scroll-behavior:smooth}
+</style>
+</head>
+<body>
+<!--
+  Reference prototype. Standalone rebuild of the approved design (Claude Design canvas, Nov 2026).
+  Open this file in a browser. The production site must look and behave exactly like this.
+  JS is split into marked sections that map 1:1 to the modules in the implementation plan.
+-->
+<div id="root" class="mode-free" style="min-height: 100%; background: #0b0c0d; color: #ededea; overflow-x: hidden;">
+
+<svg width="0" height="0" style="position: absolute;" aria-hidden="true"><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"></feTurbulence><feColorMatrix type="saturate" values="0"></feColorMatrix></filter></svg>
+
+<div class="tag" id="tag" aria-hidden="true">See the project</div>
+
+<div class="intro" id="intro" aria-hidden="true"><div class="word"><i></i><span id="word">Hello</span></div></div>
+
+<header class="site-head" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding: 28px 32px; font-size: 16px; letter-spacing: -0.01em;">
+<a href="#top">© Korouhanba</a>
+<span class="role" style="color: #8d9094;">Strategy, AI and product, Paris</span>
+<nav style="display: flex; gap: 32px;" aria-label="Main">
+<a href="#story">Story</a>
+<a href="#work">Work</a>
+<a href="#contact">Contact</a>
+</nav>
+</header>
+
+<main>
+<section id="top" style="padding: 120px 32px 96px;">
+<div class="hero-row" style="display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; padding: 0 0 64px;">
+<div style="display: flex; align-items: center; gap: 16px; background: #141517; border: 1px solid #26282b; border-radius: 9999px; padding: 10px 10px 10px 24px;">
+<span style="font-size: 15px; line-height: 1.3;">Raised in Manipur,<br>based in Paris</span>
+<span style="width: 64px; height: 64px; border-radius: 9999px; background: #ededea; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+<canvas id="globe" width="128" height="128" role="img" aria-label="Globe turning between Manipur and Paris" style="width: 64px; height: 64px; display: block;"></canvas>
+</span>
+</div>
+<div style="max-width: 440px;">
+<div style="font-size: 28px; margin-bottom: 20px;" aria-hidden="true">↘</div>
+<p style="margin: 0; font-size: clamp(24px, 2.6vw, 36px); line-height: 1.15; letter-spacing: -0.02em; font-weight: 500;">I find what matters, build it, and bring people along.</p>
+</div>
+</div>
+<h1 class="drift hero-name" style="margin: 0 0 0 -0.04em; white-space: nowrap; font-size: clamp(96px, 17vw, 280px); line-height: 0.88; font-weight: 500; letter-spacing: -0.05em;">Korouhanba Khuman <span style="display: inline-block; width: 0.6em; height: 0.07em; background: currentColor; vertical-align: 0.3em;" aria-hidden="true"></span></h1>
+</section>
+
+<section id="story" style="padding: 40px 32px 96px;">
+<div class="story-row" style="padding-bottom: clamp(96px, 12vw, 176px);">
+<div style="display: flex; flex-direction: column; gap: 28px;">
+<span aria-hidden="true" class="cue" style="display: block; width: 1px; height: 120px; background: linear-gradient(#ededea, rgba(237,237,234,0));"></span>
+<p class="rv" style="margin: 0; font-size: 20px; line-height: 1.45; color: #8d9094; max-width: 26em;">A short story.</p>
+</div>
+</div>
+<div id="chapters"></div>
+</section>
+
+<section id="work" style="border-top: 1px solid #26282b; padding: 120px 32px 120px;">
+<div class="work-head" style="display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap; margin-bottom: 72px;">
+<h2 style="margin: 0; font-size: clamp(48px, 6.6vw, 96px); line-height: 0.95; letter-spacing: -0.04em; font-weight: 500;">On the shelf</h2>
+<p style="margin: 0; max-width: 24em; color: #8d9094; font-size: 16px; line-height: 1.5;">Each book is one of my public projects on GitHub. Take one down to open it.</p>
+</div>
+<div class="shelf" id="shelf" style="position: relative; background: radial-gradient(ellipse 70% 90% at 50% 0%, #1b1c1e 0%, #121314 55%, #0d0e0f 100%); box-shadow: inset 0 48px 60px -36px rgba(0,0,0,.85), inset 24px 0 40px -30px rgba(0,0,0,.7), inset -24px 0 40px -30px rgba(0,0,0,.7); padding: 80px 0 0; overflow-x: auto;">
+<div class="shelf-row" id="shelf-row" style="display: flex; align-items: flex-end; gap: 4px; min-width: max-content; padding: 0 56px;"></div>
+<div style="position: relative; height: 12px; background: linear-gradient(#34353a, #26272a); border-top: 1px solid #45464b;"></div>
+<div style="position: relative; height: 22px; background: linear-gradient(#1d1e21, #151618); box-shadow: 0 1px 0 #2a2b2e inset, 0 24px 40px rgba(0,0,0,.75);"></div>
+</div>
+<div class="detail-grid" id="detail" aria-live="polite" style="display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 32px; padding-top: 48px;">
+<div style="grid-column: span 3;"><span class="eyebrow" id="d-lang"></span></div>
+<div style="grid-column: span 6;">
+<h3 id="d-title" style="margin: 0 0 6px; font-weight: 500; font-size: 40px; line-height: 1.05; letter-spacing: -0.03em;"></h3>
+<p id="d-repo" style="margin: 0 0 20px; color: #8d9094; font-size: 15px;"></p>
+<p id="d-desc" style="margin: 0; font-size: 18px; line-height: 1.5; max-width: 34em;"></p>
+</div>
+<div style="grid-column: span 3; display: flex; align-items: flex-end; justify-content: flex-end;">
+<a id="d-link" class="project-link" href="#" style="display: inline-flex; gap: 12px; align-items: center; border: 1px solid #3a3d41; padding: 12px 18px; font-size: 16px;"><span>View on GitHub</span><span aria-hidden="true">↗</span></a>
+</div>
+</div>
+</section>
+</main>
+
+<footer id="contact" style="border-top: 1px solid #26282b; padding: 96px 32px 32px;">
+<h2 class="talk" style="margin: 0 0 96px; font-size: clamp(56px, 10vw, 160px); line-height: 0.9; letter-spacing: -0.05em; font-weight: 500;">Let's talk.</h2>
+<div class="foot" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px;">
+<div style="border-top: 1px solid #26282b; padding-top: 16px; display: flex; flex-direction: column; gap: 8px;">
+<span style="margin-bottom: 16px;">Contact</span>
+<a href="mailto:laikhuramkorouhanba@gmail.com" style="color: #8d9094;">laikhuramkorouhanba@gmail.com</a>
+</div>
+<div style="border-top: 1px solid #26282b; padding-top: 16px; display: flex; flex-direction: column; gap: 8px;">
+<span style="margin-bottom: 16px;">Elsewhere</span>
+<a href="https://www.linkedin.com/in/korouhanbakhuman">LinkedIn</a>
+<a href="https://github.com/laikhuramkorouhanba">GitHub</a>
+</div>
+<div style="border-top: 1px solid #26282b; padding-top: 16px; display: flex; flex-direction: column; gap: 8px;">
+<span style="margin-bottom: 16px;">Based in</span>
+<span>Paris, France</span>
+<span style="color: #8d9094;">Open to internships from April 2027</span>
+</div>
+</div>
+<div class="legal" style="display: flex; justify-content: space-between; margin-top: 120px; font-size: 14px; color: #8d9094;"><span>© 2026 Korouhanba Khuman Laikhuram</span><a href="#top" style="color: #8d9094;">Back to top ↑</a></div>
+</footer>
+</div>
+
+<script>
+/* ===== content (src/content.js) ===== */
+var GREETINGS = ['Hello', 'Bonjour', 'नमस्ते', 'Khurumjari', 'こんにちは', 'Hola', 'Ciao', 'Hello'];
+var CHAPTERS = [
+  'Raised in Manipur, in the far north east of India.',
+  'I took things apart long before I knew it was called engineering.',
+  'Chennai taught me to build.',
+  'Today I study data science and AI for business at École Polytechnique and HEC Paris.',
+  'In strategy teams, I built tools that turned reports from dozens of countries into one clear picture for leadership.',
+  'I care how things look and feel. Typefaces, buildings, album covers.',
+  'And the aim has always been the same: make the complicated feel effortless.'
+];
+var REPOS = [
+  { title: 'Churn', subtitle: 'Who leaves, and when', repo: 'churn-streamlit', lang: 'Python, Streamlit, Docker', desc: 'Customer churn prediction, served as a Streamlit app with Docker and CI.', url: 'https://github.com/laikhuramkorouhanba/churn-streamlit' },
+  { title: 'Known Exploits', subtitle: 'Asking questions of a catalogue', repo: 'document-extraction-rag', lang: 'Python, RAG', desc: 'Question answering over the CISA catalogue of known exploited vulnerabilities, now growing into an MCP server.', url: 'https://github.com/laikhuramkorouhanba' },
+  { title: 'Murmur', subtitle: 'The terminal, spoken', repo: 'murmur', lang: 'Python, macOS', desc: 'A macOS menu bar app that reads terminal output aloud for blind and low vision developers, and can fix the last error.', url: 'https://github.com/laikhuramkorouhanba' },
+  { title: 'Recommender', subtitle: 'Alternating least squares', repo: 'als-recommender', lang: 'PySpark', desc: 'An element-wise ALS recommender system built in PySpark with a teammate.', url: 'https://github.com/laikhuramkorouhanba' },
+  { title: 'Long or Short', subtitle: 'A forecasting challenge', repo: 'qrt-long-or-short', lang: 'Python', desc: 'Team entry for the QRT asset allocation challenge: forecasting which way returns go.', url: 'https://github.com/laikhuramkorouhanba' },
+  { title: 'This Website', subtitle: 'Built in the open', repo: '_', lang: 'HTML, CSS, JavaScript', desc: 'The site you are reading, designed and built in the open.', url: 'https://github.com/laikhuramkorouhanba/_' }
+];
+var BOOK_LOOKS = [
+  { bg: '#1f3b2f', fg: '#d6c08a', W: 62, H: 420 },
+  { bg: '#4a1d2a', fg: '#e0cfa8', W: 74, H: 450 },
+  { bg: '#e4ddcc', fg: '#1d1c1a', W: 56, H: 400 },
+  { bg: '#1d2a44', fg: '#d4d7dc', W: 68, H: 436 },
+  { bg: '#a8742a', fg: '#1a1408', W: 60, H: 410 },
+  { bg: '#2b2a28', fg: '#e6dfcf', W: 70, H: 444 }
+];
+var COVER_FIGURES = [
+  'M15 120 L45 90 L70 100 L100 55 L135 40 M15 135 H135',
+  'M75 15 A60 60 0 1 1 74.9 15 M75 45 A30 30 0 1 1 74.9 45 M15 75 H135',
+  'M20 75 C40 40 55 110 75 75 S110 40 130 75 M20 95 C40 60 55 130 75 95 S110 60 130 95',
+  'M25 25 H125 V125 H25 Z M25 58 H125 M25 92 H125 M58 25 V125 M92 25 V125',
+  'M15 75 H135 M30 75 L50 35 L70 95 L90 45 L110 110 L125 60',
+  'M75 20 L130 120 H20 Z M75 60 L105 115 H45 Z'
+];
+
+/* ===== globe (src/globe.js), LAND = data/land-dots.json: flat [lon, lat, lon, lat, ...] ===== */
+var LAND = [-125,-84,-97,-84,-69,-84,-42,-84,-14,-84,14,-84,42,-84,69,-84,97,-84,125,-84,152,-84,-142,-81,-123,-81,-104,-81,-85,-81,-28,-81,-9,-81,9,-81,28,-81,47,-81,66,-81,85,-81,104,-81,123,-81,142,-81,-151,-78,-137,-78,-122,-78,-108,-78,-94,-78,-79,-78,-22,-78,-7,-78,7,-78,22,-78,36,-78,50,-78,65,-78,79,-78,94,-78,108,-78,122,-78,137,-78,151,-78,-134,-75,-122,-75,-110,-75,-99,-75,-87,-75,-75,-75,-6,-75,6,-75,17,-75,29,-75,41,-75,52,-75,64,-75,75,-75,87,-75,99,-75,110,-75,122,-75,134,-75,145,-75,157,-75,-102,-72,-73,-72,-63,-72,-5,-72,5,-72,15,-72,24,-72,34,-72,44,-72,54,-72,63,-72,73,-72,83,-72,92,-72,102,-72,112,-72,122,-72,131,-72,141,-72,151,-72,161,-72,170,-72,46,-69,54,-69,63,-69,80,-69,88,-69,96,-69,105,-69,113,-69,121,-69,130,-69,138,-69,147,-69,155,-69,-62,-66,55,-66,114,-66,-68,-54,-71,-51,-72,-48,-67,-48,-74,-45,-70,-45,-66,-45,167,-45,-71,-42,-67,-42,148,-42,172,-42,-72,-39,-68,-39,-64,-39,176,-39,-72,-36,-69,-36,-65,-36,-61,-36,-58,-36,143,-36,147,-36,-70,-33,-66,-33,-62,-33,-59,-33,-55,-33,20,-33,23,-33,27,-33,116,-33,119,-33,123,-33,137,-33,141,-33,144,-33,148,-33,151,-33,-69,-30,-66,-30,-62,-30,-59,-30,-55,-30,-52,-30,17,-30,21,-30,24,-30,28,-30,118,-30,121,-30,125,-30,128,-30,132,-30,135,-30,138,-30,142,-30,145,-30,149,-30,152,-30,-69,-27,-66,-27,-62,-27,-59,-27,-56,-27,-52,-27,-49,-27,19,-27,22,-27,25,-27,29,-27,32,-27,116,-27,119,-27,123,-27,126,-27,130,-27,133,-27,136,-27,140,-27,143,-27,146,-27,150,-27,153,-27,-69,-24,-65,-24,-62,-24,-59,-24,-56,-24,-52,-24,-49,-24,16,-24,20,-24,23,-24,26,-24,29,-24,33,-24,46,-24,115,-24,118,-24,121,-24,124,-24,128,-24,131,-24,134,-24,137,-24,141,-24,144,-24,147,-24,151,-24,-67,-21,-64,-21,-61,-21,-58,-21,-55,-21,-51,-21,-48,-21,-45,-21,-42,-21,16,-21,19,-21,23,-21,26,-21,29,-21,32,-21,45,-21,48,-21,119,-21,122,-21,125,-21,129,-21,132,-21,135,-21,138,-21,141,-21,145,-21,148,-21,-69,-18,-66,-18,-63,-18,-60,-18,-57,-18,-54,-18,-51,-18,-47,-18,-44,-18,-41,-18,13,-18,16,-18,19,-18,22,-18,25,-18,28,-18,32,-18,35,-18,44,-18,47,-18,123,-18,126,-18,129,-18,133,-18,136,-18,139,-18,142,-18,145,-18,-74,-15,-71,-15,-68,-15,-65,-15,-62,-15,-59,-15,-56,-15,-53,-15,-50,-15,-47,-15,-43,-15,-40,-15,12,-15,16,-15,19,-15,22,-15,25,-15,28,-15,31,-15,34,-15,37,-15,40,-15,50,-15,127,-15,130,-15,133,-15,143,-15,-75,-12,-72,-12,-69,-12,-66,-12,-63,-12,-60,-12,-57,-12,-54,-12,-51,-12,-48,-12,-45,-12,-42,-12,-38,-12,14,-12,17,-12,20,-12,23,-12,26,-12,29,-12,32,-12,35,-12,38,-12,134,-12,143,-12,-77,-9,-74,-9,-71,-9,-68,-9,-65,-9,-62,-9,-59,-9,-56,-9,-53,-9,-50,-9,-47,-9,-44,-9,-41,-9,-38,-9,14,-9,17,-9,20,-9,23,-9,26,-9,29,-9,32,-9,35,-9,38,-9,126,-9,147,-9,-80,-6,-77,-6,-74,-6,-71,-6,-68,-6,-65,-6,-62,-6,-59,-6,-56,-6,-53,-6,-50,-6,-47,-6,-44,-6,-41,-6,-38,-6,14,-6,17,-6,20,-6,23,-6,26,-6,29,-6,32,-6,35,-6,38,-6,135,-6,141,-6,144,-6,147,-6,150,-6,-78,-3,-75,-3,-72,-3,-69,-3,-66,-3,-63,-3,-60,-3,-57,-3,-54,-3,-51,-3,-48,-3,-45,-3,-42,-3,12,-3,15,-3,18,-3,21,-3,24,-3,27,-3,30,-3,33,-3,36,-3,39,-3,102,-3,105,-3,111,-3,114,-3,120,-3,129,-3,138,-3,141,-3,-78,0,-75,0,-72,0,-69,0,-66,0,-63,0,-60,0,-57,0,-54,0,-51,0,12,0,15,0,18,0,21,0,24,0,27,0,30,0,33,0,36,0,39,0,42,0,102,0,111,0,114,0,117,0,120,0,-75,3,-72,3,-69,3,-66,3,-63,3,-60,3,-57,3,-54,3,-51,3,12,3,15,3,18,3,21,3,24,3,27,3,30,3,33,3,36,3,39,3,42,3,45,3,99,3,102,3,114,3,117,3,-77,6,-74,6,-71,6,-68,6,-65,6,-62,6,-59,6,-8,6,-5,6,-2,6,8,6,11,6,14,6,17,6,20,6,23,6,26,6,29,6,32,6,35,6,38,6,41,6,44,6,47,6,101,6,116,6,126,6,-83,9,-80,9,-74,9,-71,9,-68,9,-65,9,-62,9,-11,9,-8,9,-5,9,-2,9,2,9,5,9,8,9,11,9,14,9,17,9,20,9,23,9,26,9,29,9,32,9,35,9,38,9,41,9,44,9,47,9,50,9,77,9,80,9,98,9,126,9,-85,12,-14,12,-11,12,-8,12,-5,12,-2,12,2,12,5,12,8,12,11,12,14,12,17,12,20,12,23,12,26,12,29,12,32,12,35,12,38,12,42,12,51,12,75,12,78,12,103,12,106,12,-90,15,-87,15,-84,15,-16,15,-12,15,-9,15,-6,15,-3,15,0,15,3,15,6,15,9,15,12,15,16,15,19,15,22,15,25,15,28,15,31,15,34,15,37,15,40,15,43,15,47,15,50,15,74,15,78,15,99,15,102,15,106,15,109,15,121,15,-101,18,-98,18,-95,18,-92,18,-88,18,-66,18,-16,18,-13,18,-9,18,-6,18,-3,18,0,18,3,18,6,18,9,18,13,18,16,18,19,18,22,18,25,18,28,18,32,18,35,18,38,18,44,18,47,18,51,18,54,18,76,18,79,18,82,18,95,18,98,18,101,18,104,18,-103,21,-100,21,-90,21,-77,21,-16,21,-13,21,-10,21,-6,21,-3,21,0,21,3,21,6,21,10,21,13,21,16,21,19,21,23,21,26,21,29,21,32,21,35,21,42,21,45,21,48,21,51,21,55,21,58,21,71,21,74,21,77,21,80,21,84,21,87,21,93,21,96,21,100,21,103,21,106,21,-105,24,-101,24,-98,24,-13,24,-10,24,-7,24,-3,24,0,24,3,24,7,24,10,24,13,24,16,24,20,24,23,24,26,24,29,24,33,24,39,24,43,24,46,24,49,24,52,24,56,24,69,24,72,24,75,24,79,24,82,24,85,24,88,24,92,24,95,24,98,24,101,24,105,24,108,24,111,24,115,24,118,24,121,24,-113,27,-109,27,-106,27,-103,27,-99,27,-12,27,-8,27,-5,27,-2,27,2,27,5,27,8,27,12,27,15,27,19,27,22,27,25,27,29,27,32,27,39,27,42,27,45,27,49,27,56,27,59,27,62,27,66,27,69,27,72,27,76,27,79,27,82,27,86,27,89,27,93,27,96,27,99,27,103,27,106,27,109,27,113,27,116,27,119,27,-111,30,-107,30,-104,30,-100,30,-97,30,-93,30,-90,30,-83,30,-7,30,-3,30,0,30,3,30,7,30,10,30,14,30,17,30,21,30,24,30,28,30,31,30,35,30,38,30,42,30,45,30,48,30,52,30,55,30,59,30,62,30,66,30,69,30,73,30,76,30,80,30,83,30,87,30,90,30,93,30,97,30,100,30,104,30,107,30,111,30,114,30,118,30,121,30,-116,33,-112,33,-109,33,-105,33,-102,33,-98,33,-94,33,-91,33,-87,33,-84,33,-80,33,-5,33,-2,33,2,33,5,33,9,33,37,33,41,33,45,33,48,33,52,33,55,33,59,33,62,33,66,33,70,33,73,33,77,33,80,33,84,33,87,33,91,33,94,33,98,33,102,33,105,33,109,33,112,33,116,33,119,33,130,33,-121,36,-117,36,-113,36,-109,36,-106,36,-102,36,-98,36,-95,36,-91,36,-87,36,-84,36,-80,36,-76,36,-6,36,2,36,6,36,9,36,39,36,43,36,46,36,50,36,54,36,58,36,61,36,65,36,69,36,72,36,76,36,80,36,84,36,87,36,91,36,95,36,98,36,102,36,106,36,109,36,113,36,117,36,128,36,139,36,-122,39,-118,39,-114,39,-110,39,-106,39,-103,39,-99,39,-95,39,-91,39,-87,39,-83,39,-79,39,-75,39,-6,39,-2,39,21,39,29,39,33,39,37,39,41,39,45,39,48,39,56,39,60,39,64,39,68,39,72,39,75,39,79,39,83,39,87,39,91,39,95,39,99,39,103,39,106,39,110,39,114,39,126,39,141,39,-123,42,-119,42,-115,42,-111,42,-107,42,-103,42,-99,42,-95,42,-91,42,-87,42,-83,42,-79,42,-75,42,-71,42,-6,42,-2,42,2,42,14,42,22,42,26,42,34,42,42,42,47,42,55,42,59,42,63,42,67,42,71,42,75,42,79,42,83,42,87,42,91,42,95,42,99,42,103,42,107,42,111,42,115,42,119,42,123,42,127,42,-121,45,-116,45,-112,45,-108,45,-104,45,-100,45,-95,45,-91,45,-87,45,-83,45,-78,45,-74,45,-70,45,2,45,6,45,11,45,19,45,23,45,28,45,40,45,44,45,53,45,57,45,61,45,66,45,70,45,74,45,78,45,83,45,87,45,91,45,95,45,100,45,104,45,108,45,112,45,116,45,121,45,125,45,129,45,133,45,142,45,-121,48,-117,48,-112,48,-108,48,-103,48,-99,48,-94,48,-90,48,-85,48,-81,48,-76,48,-72,48,-67,48,-58,48,-54,48,0,48,5,48,9,48,14,48,18,48,23,48,27,48,32,48,36,48,41,48,45,48,50,48,54,48,59,48,63,48,68,48,72,48,77,48,81,48,86,48,90,48,95,48,99,48,104,48,108,48,113,48,117,48,122,48,126,48,131,48,135,48,140,48,-123,51,-118,51,-114,51,-109,51,-104,51,-99,51,-95,51,-90,51,-85,51,-81,51,-76,51,-71,51,-66,51,-62,51,-57,51,0,51,5,51,9,51,14,51,19,51,24,51,28,51,33,51,38,51,43,51,47,51,52,51,57,51,62,51,66,51,71,51,76,51,81,51,85,51,90,51,95,51,99,51,104,51,109,51,114,51,118,51,123,51,128,51,133,51,137,51,-129,54,-124,54,-119,54,-114,54,-109,54,-104,54,-99,54,-94,54,-89,54,-84,54,-79,54,-74,54,-68,54,-63,54,-58,54,-8,54,-3,54,13,54,18,54,23,54,28,54,33,54,38,54,43,54,48,54,53,54,58,54,63,54,68,54,74,54,79,54,84,54,89,54,94,54,99,54,104,54,109,54,114,54,119,54,124,54,129,54,134,54,139,54,160,54,-158,57,-130,57,-125,57,-119,57,-114,57,-108,57,-102,57,-97,57,-91,57,-75,57,-69,57,-64,57,-3,57,14,57,25,57,30,57,36,57,42,57,47,57,53,57,58,57,64,57,69,57,75,57,80,57,86,57,91,57,97,57,102,57,108,57,114,57,119,57,125,57,130,57,136,57,158,57,-162,60,-156,60,-150,60,-138,60,-132,60,-126,60,-120,60,-114,60,-108,60,-102,60,-96,60,-72,60,6,60,12,60,18,60,24,60,30,60,36,60,42,60,48,60,54,60,60,60,66,60,72,60,78,60,84,60,90,60,96,60,102,60,108,60,114,60,120,60,126,60,132,60,138,60,144,60,150,60,162,60,-160,63,-153,63,-147,63,-140,63,-133,63,-127,63,-120,63,-113,63,-107,63,-100,63,-93,63,-47,63,13,63,27,63,33,63,40,63,47,63,53,63,60,63,67,63,73,63,80,63,87,63,93,63,100,63,107,63,113,63,120,63,127,63,133,63,140,63,147,63,153,63,160,63,167,63,173,63,-180,66,-173,66,-165,66,-158,66,-151,66,-143,66,-136,66,-129,66,-121,66,-114,66,-107,66,-99,66,-92,66,-70,66,-62,66,-48,66,-40,66,-18,66,18,66,26,66,33,66,48,66,55,66,62,66,70,66,77,66,84,66,92,66,99,66,107,66,114,66,121,66,129,66,136,66,143,66,151,66,158,66,165,66,173,66,-163,69,-155,69,-147,69,-138,69,-130,69,-121,69,-113,69,-105,69,-96,69,-71,69,-46,69,-38,69,-29,69,21,69,29,69,63,69,71,69,80,69,88,69,96,69,105,69,113,69,121,69,130,69,138,69,147,69,155,69,163,69,172,69,-122,72,-112,72,-83,72,-54,72,-44,72,-34,72,-24,72,54,72,83,72,92,72,102,72,112,72,122,72,141,72,-110,75,-99,75,-87,75,-52,75,-41,75,-29,75,87,75,99,75,110,75,-79,78,-65,78,-50,78,-36,78,-22,78,22,78,-85,81,-47,81,-28,81];
+var CITIES = [[93.94, 24.82], [2.35, 48.86]];
+function drawGlobe(cv, now) {
+  if (!cv || !cv.getContext) return;
+  var ctx = cv.getContext('2d'), S = cv.width, R = S / 2 - 6, cx = S / 2, cy = S / 2, D = Math.PI / 180;
+  var t = (Math.sin(now / 3200) + 1) / 2;
+  var e = t * t * (3 - 2 * t);
+  var lam0 = (93.94 + (2.35 - 93.94) * e) * D, phi0 = (24 + 14 * e) * D;
+  var sp = Math.sin(phi0), cp = Math.cos(phi0);
+  function proj(lon, lat) {
+    var l = lon * D - lam0, f = lat * D, cf = Math.cos(f), sf = Math.sin(f), cl = Math.cos(l);
+    var z = sp * sf + cp * cf * cl;
+    return [cx + R * cf * Math.sin(l), cy - R * (cp * sf - sp * cf * cl), z];
+  }
+  ctx.clearRect(0, 0, S, S);
+  ctx.fillStyle = '#ededea'; ctx.fillRect(0, 0, S, S);
+  ctx.strokeStyle = 'rgba(11,12,13,0.18)'; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2); ctx.stroke();
+  for (var i = 0; i < LAND.length; i += 2) {
+    var q = proj(LAND[i], LAND[i + 1]);
+    if (q[2] <= 0) continue;
+    ctx.fillStyle = 'rgba(11,12,13,' + (0.25 + 0.6 * q[2]).toFixed(2) + ')';
+    ctx.beginPath(); ctx.arc(q[0], q[1], 1.6, 0, Math.PI * 2); ctx.fill();
+  }
+  var a = CITIES[0], b = CITIES[1];
+  function v(c) { var l = c[0] * D, f = c[1] * D; return [Math.cos(f) * Math.cos(l), Math.cos(f) * Math.sin(l), Math.sin(f)]; }
+  var A = v(a), B = v(b), om = Math.acos(A[0] * B[0] + A[1] * B[1] + A[2] * B[2]);
+  ctx.strokeStyle = '#0b0c0d'; ctx.lineWidth = 2; ctx.beginPath(); var pen = false;
+  for (var k = 0; k <= 40; k++) {
+    var s = k / 40, w1 = Math.sin((1 - s) * om) / Math.sin(om), w2 = Math.sin(s * om) / Math.sin(om);
+    var x = w1 * A[0] + w2 * B[0], y = w1 * A[1] + w2 * B[1], zz = w1 * A[2] + w2 * B[2];
+    var lift = 1 + 0.12 * Math.sin(Math.PI * s), n = Math.sqrt(x * x + y * y + zz * zz);
+    var lon = Math.atan2(y, x) / D, lat = Math.asin(zz / n) / D, q2 = proj(lon, lat);
+    var px = cx + (q2[0] - cx) * lift, py = cy + (q2[1] - cy) * lift;
+    if (q2[2] > 0) { if (pen) ctx.lineTo(px, py); else { ctx.moveTo(px, py); pen = true; } } else pen = false;
+  }
+  ctx.stroke();
+  CITIES.forEach(function (c) {
+    var q = proj(c[0], c[1]); if (q[2] <= 0) return;
+    ctx.fillStyle = '#0b0c0d'; ctx.beginPath(); ctx.arc(q[0], q[1], 4.5, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = '#ededea'; ctx.lineWidth = 1.5; ctx.stroke();
+  });
+}
+
+/* ===== story (src/story.js) ===== */
+(function () {
+  var host = document.getElementById('chapters');
+  CHAPTERS.forEach(function (line) {
+    var row = document.createElement('div');
+    row.className = 'story-row rv';
+    row.style.cssText = 'padding-bottom: clamp(96px, 12vw, 176px); box-sizing: border-box;';
+    var p = document.createElement('p');
+    p.style.cssText = 'margin: 0; max-width: 18em; font-size: clamp(32px, 4.4vw, 64px); line-height: 1.04; letter-spacing: -0.035em; font-weight: 500;';
+    p.textContent = line;
+    row.appendChild(p); host.appendChild(row);
+  });
+})();
+
+/* ===== intro (src/intro.js) ===== */
+(function () {
+  var intro = document.getElementById('intro'), word = document.getElementById('word');
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { intro.remove(); return; }
+  var i = 0;
+  function step() {
+    i += 1;
+    if (i < GREETINGS.length) { word.textContent = GREETINGS[i]; setTimeout(step, i === GREETINGS.length - 1 ? 520 : 170); }
+    else { intro.classList.add('leave'); setTimeout(function () { intro.remove(); }, 950); }
+  }
+  setTimeout(step, 750);
+})();
+
+/* ===== shelf (src/shelf.js) ===== */
+var Shelf = (function () {
+  var row = document.getElementById('shelf-row'), picked = 0, slots = [];
+  function geom(i) { var k = BOOK_LOOKS[i % BOOK_LOOKS.length]; return { k: k, W: k.W, H: k.H, C: Math.round(k.H * 0.68) }; }
+  function grain() { return '<svg class="grain"><rect width="100%" height="100%" filter="url(#grain)"></rect></svg>'; }
+  REPOS.forEach(function (r, i) {
+    var g = geom(i), k = g.k, W = g.W, H = g.H, C = g.C, n = (i < 9 ? '0' : '') + (i + 1);
+    var cloth = 'background-color:' + k.bg + ';color:' + k.fg + ';';
+    var slot = document.createElement('div'); slot.className = 'slot';
+    slot.innerHTML =
+      '<button class="b3d" type="button" style="width:' + W + 'px;height:' + H + 'px;">' +
+      '<div class="face" style="left:0;width:' + W + 'px;height:' + H + 'px;transform:translateZ(' + (C / 2) + 'px);' + cloth + 'background-image:linear-gradient(90deg,rgba(0,0,0,.35),rgba(255,255,255,.10) 22%,rgba(255,255,255,0) 45%,rgba(0,0,0,.12) 80%,rgba(0,0,0,.35));display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:22px 0;box-shadow:inset 0 3px 0 rgba(255,255,255,.06),inset 0 -3px 0 rgba(0,0,0,.25);">' + grain() +
+        '<span style="position:absolute;left:0;right:0;top:40px;border-top:1px solid currentColor;border-bottom:1px solid currentColor;height:3px;opacity:.55;"></span>' +
+        '<span style="position:absolute;left:0;right:0;bottom:40px;border-top:1px solid currentColor;border-bottom:1px solid currentColor;height:3px;opacity:.55;"></span>' +
+        '<span style="position:relative;font-size:9px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;">Khuman</span>' +
+        '<span style="position:relative;writing-mode:vertical-rl;transform:rotate(180deg);font-size:19px;font-weight:500;letter-spacing:0.01em;white-space:nowrap;"></span>' +
+        '<span style="position:relative;font-size:9px;font-weight:500;letter-spacing:.16em;">' + n + '</span></div>' +
+      '<div class="face" style="left:' + ((W - C) / 2) + 'px;width:' + C + 'px;height:' + H + 'px;transform:rotateY(-90deg) translateZ(' + (W / 2) + 'px);' + cloth + 'background-image:linear-gradient(90deg,rgba(0,0,0,.30) 0,rgba(0,0,0,.08) 14px,rgba(255,255,255,.07) 16px,rgba(255,255,255,0) 40%,rgba(0,0,0,.10));display:flex;flex-direction:column;justify-content:space-between;padding:28px 26px 30px 34px;">' + grain() +
+        '<span style="position:absolute;inset:16px 16px 16px 26px;border:1px solid currentColor;opacity:.3;"></span>' +
+        '<div style="position:relative;display:flex;justify-content:space-between;font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;"><span>Korouhanba Khuman</span><span>' + n + '</span></div>' +
+        '<div style="position:relative;display:flex;justify-content:center;"><svg width="140" height="140" viewBox="0 0 150 150" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="' + COVER_FIGURES[i % COVER_FIGURES.length] + '"></path></svg></div>' +
+        '<div style="position:relative;"><div class="c-title" style="font-size:40px;font-weight:500;line-height:0.95;letter-spacing:-0.035em;margin-bottom:12px;"></div><div class="c-sub" style="font-size:15px;letter-spacing:-0.005em;opacity:.75;"></div></div></div>' +
+      '<div class="face" style="left:' + ((W - C) / 2 + 4) + 'px;top:5px;width:' + (C - 8) + 'px;height:' + (H - 10) + 'px;transform:rotateY(90deg) translateZ(' + (W / 2 - 2) + 'px);background:repeating-linear-gradient(90deg,#efe9dc 0 1px,#ddd6c5 1px 2px);"></div>' +
+      '</button>';
+    slot.querySelector('.face span[style*="vertical-rl"]').textContent = r.title;
+    slot.querySelector('.c-title').textContent = r.title;
+    slot.querySelector('.c-sub').textContent = r.subtitle;
+    slot.querySelector('button').addEventListener('click', function () { pick(i, true); });
+    row.appendChild(slot); slots.push(slot);
+  });
+  function pick(i, fromUser) {
+    picked = i;
+    slots.forEach(function (s, j) {
+      var g = geom(j), sel = j === picked, b = s.querySelector('button');
+      s.style.width = (sel ? Math.round(g.C * 0.985 + g.W * 0.18) + 24 : g.W) + 'px';
+      b.style.transform = sel ? 'rotateY(80deg)' : 'rotateY(0deg)';
+      b.setAttribute('aria-pressed', sel ? 'true' : 'false');
+      b.setAttribute('aria-label', (sel ? 'Open: ' : 'Open ') + REPOS[j].title);
+    });
+    var r = REPOS[i];
+    document.getElementById('d-lang').textContent = r.lang;
+    document.getElementById('d-title').textContent = r.title;
+    document.getElementById('d-repo').textContent = r.repo;
+    document.getElementById('d-desc').textContent = r.desc;
+    document.getElementById('d-link').href = r.url;
+    if (fromUser && window.innerWidth < 761) setTimeout(function () { slots[i].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' }); }, 720);
+  }
+  pick(0);
+  return { pick: pick };
+})();
+
+/* ===== cursor label + animation loop (src/cursor.js, src/main.js) ===== */
+(function () {
+  var root = document.getElementById('root'), tag = document.getElementById('tag'), cv = document.getElementById('globe');
+  var mx = -999, my = -999, tx = -999, ty = -999;
+  window.addEventListener('mousemove', function (e) { mx = e.clientX; my = e.clientY; });
+  function setMode(m) { root.className = 'mode-' + m; }
+  [document.getElementById('shelf'), document.getElementById('d-link')].forEach(function (el) {
+    el.addEventListener('mouseenter', function () { setMode('project'); });
+    el.addEventListener('mouseleave', function () { setMode('free'); });
+  });
+  function loop(now) {
+    tx += (mx - tx) * 0.22; ty += (my - ty) * 0.22;
+    tag.style.transform = 'translate(' + tx + 'px,' + ty + 'px) translate(-50%,-50%)';
+    drawGlobe(cv, now);
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

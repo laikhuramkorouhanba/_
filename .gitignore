@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.DS_Store
+portfolio-handoff/
+portfolio-handoff.zip
+test-results/
+playwright-report/
