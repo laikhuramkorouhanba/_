@@ -1,0 +1,58 @@
+body{margin:0;background:#0b0c0d;color:#ededea;font-family:"Inter Tight","Helvetica Neue",Arial,sans-serif}
+a{color:#ededea;text-decoration:none;transition:opacity 150ms}
+a:hover{opacity:.6}
+.eyebrow{font-size:14px;color:#8d9094;letter-spacing:-.005em}
+.intro{position:fixed;inset:0;z-index:50;background:#0b0c0d;display:flex;align-items:center;justify-content:center;transition:transform 900ms cubic-bezier(.7,0,.2,1),border-radius 900ms}
+.intro.leave{transform:translateY(-100%);border-bottom-left-radius:50% 120px;border-bottom-right-radius:50% 120px}
+.word{font-size:clamp(40px,6vw,72px);font-weight:500;letter-spacing:-.03em;display:flex;align-items:center;gap:18px}
+.word i{width:12px;height:12px;border-radius:9999px;background:#ededea;display:block}
+.tag{position:fixed;left:0;top:0;pointer-events:none;z-index:41;color:#fff;mix-blend-mode:difference;font-size:16px;font-weight:500;letter-spacing:-.02em;white-space:nowrap;transform:translate(-50%,-50%);transition:opacity 250ms}
+.mode-free .tag{opacity:0}
+.slot{position:relative;flex:none;height:470px;display:flex;align-items:flex-end;justify-content:center;perspective:2200px;transition:width 700ms cubic-bezier(.2,.8,.2,1)}
+.b3d{position:relative;border:0;padding:0;background:none;cursor:pointer;transform-style:preserve-3d;transition:transform 700ms cubic-bezier(.2,.8,.2,1);font:inherit}
+.b3d:focus-visible{outline:2px solid #ededea;outline-offset:6px}
+.face{position:absolute;top:0;box-sizing:border-box;backface-visibility:hidden;overflow:hidden}
+.slot::after{content:"";position:absolute;left:6%;right:6%;bottom:-3px;height:8px;background:rgba(0,0,0,.7);filter:blur(5px);z-index:-1}
+.grain{position:absolute;inset:0;width:100%;height:100%;mix-blend-mode:multiply;opacity:.35;pointer-events:none}
+@supports (animation-timeline: view()){
+.rv{animation:rv linear both;animation-timeline:view();animation-range:entry 5% cover 40%}
+@keyframes rv{from{opacity:.08;transform:translateY(56px)}to{opacity:1;transform:none}}
+.drift{animation:drift linear both;animation-timeline:scroll(root);animation-range:0 1400px}
+@keyframes drift{to{transform:translateX(-22%)}}
+}
+@media (hover:none){.tag{display:none}}
+.cue{transform-origin:top;animation:cue 2.4s cubic-bezier(.6,0,.2,1) infinite}
+@keyframes cue{0%{transform:scaleY(0);opacity:1}60%{transform:scaleY(1);opacity:1}100%{transform:scaleY(1);opacity:0}}
+@media (prefers-reduced-motion: reduce){.rv,.drift,.cue{animation:none}.intro{display:none}}
+header,section,footer{max-width:1440px;margin-left:auto;margin-right:auto;box-sizing:border-box}
+.story-row{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:32px}
+.story-row>*{grid-column:4/-1}
+@media (max-width:760px){
+header,section,footer{padding-left:16px !important;padding-right:16px !important}
+.site-head{padding-top:16px !important;padding-bottom:16px !important}
+.site-head .role{display:none}
+.site-head nav{gap:20px !important}
+.site-head a{display:inline-block;padding:10px 0}
+#top{padding-top:56px !important;padding-bottom:56px !important}
+.hero-row{flex-direction:column;align-items:flex-start !important;gap:40px !important;padding-bottom:40px !important}
+.hero-name{font-size:clamp(56px,19vw,96px) !important}
+#story{padding-top:24px !important;padding-bottom:48px !important}
+.story-row{grid-template-columns:1fr !important;padding-bottom:72px !important}
+.story-row>*{grid-column:1/-1 !important}
+.story-row p{max-width:none !important}
+.cue{height:72px !important}
+#work{padding-top:72px !important;padding-bottom:72px !important}
+.work-head{margin-bottom:40px !important}
+.shelf{padding-top:40px !important;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+.shelf-row{zoom:.66;padding:0 24px !important}
+.slot{scroll-snap-align:center}
+.detail-grid{grid-template-columns:1fr !important;row-gap:12px;padding-top:32px !important}
+.detail-grid>*{grid-column:1/-1 !important;justify-content:flex-start !important}
+.detail-grid h3{font-size:32px !important}
+#contact{padding-top:64px !important}
+.talk{margin-bottom:48px !important}
+.foot{grid-template-columns:1fr !important;gap:24px !important}
+.foot a{display:inline-block;padding:6px 0}
+.legal{margin-top:64px !important;flex-wrap:wrap;gap:12px}
+}
+html{scroll-behavior:smooth}
