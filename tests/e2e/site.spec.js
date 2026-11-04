@@ -55,6 +55,35 @@ test.describe('phone 390x844', () => {
     await expect(page.locator('#intro')).toHaveCount(0, { timeout: 5000 });
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(390);
   });
+
+  test('opening the last book keeps the page in place', async ({ page }) => {
+    await page.goto(SITE);
+    await expect(page.locator('#intro')).toHaveCount(0, { timeout: 5000 });
+    await page.locator('#shelf-row .slot').last().locator('button').click();
+    await expect(page.locator('#d-title')).toHaveText('This Website');
+    // Wait for the turn and the centring scroll that follows it.
+    await page.waitForTimeout(1500);
+    const m = await page.evaluate(() => {
+      const desc = document.getElementById('d-desc').getBoundingClientRect();
+      const shelf = document.getElementById('shelf');
+      const [row, plank] = shelf.children;
+      return {
+        rootScroll: document.getElementById('root').scrollLeft,
+        shelfScroll: shelf.scrollLeft,
+        descLeft: desc.left,
+        descRight: desc.right,
+        rowWidth: row.getBoundingClientRect().width,
+        plankWidth: plank.getBoundingClientRect().width,
+      };
+    });
+    // Only the shelf scrolls sideways, never the page around it.
+    expect(m.rootScroll).toBe(0);
+    expect(m.shelfScroll).toBeGreaterThan(0);
+    expect(m.descLeft).toBeGreaterThanOrEqual(16);
+    expect(m.descRight).toBeLessThanOrEqual(374);
+    // The plank runs under every book, not just the first screenful.
+    expect(m.plankWidth).toBeGreaterThanOrEqual(m.rowWidth - 1);
+  });
 });
 
 test('Review Focus 3: story lines are fully visible once scrolled into view', async ({ page }) => {

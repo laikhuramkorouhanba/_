@@ -78,7 +78,7 @@ A one page site that presents Korouhanba for strategy, AI and product roles at e
 - Three columns with hairline tops:
   - **Contact:** laikhuramkorouhanba@gmail.com (mailto link)
   - **Elsewhere:** LinkedIn (`https://www.linkedin.com/in/korouhanbakhuman`), GitHub (`https://github.com/laikhuramkorouhanba`)
-  - **Based in:** Paris, France, and "Open to internships from April 2027" in muted grey
+  - **Based in:** Paris, France, and "Open to internships from May 2027" in muted grey
 - A bottom row with "© 2026 Korouhanba Khuman Laikhuram" and "Back to top ↑".
 - Phones: one column, and the bottom row wraps.
 
