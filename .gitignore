@@ -5,3 +5,11 @@ portfolio-handoff/
 portfolio-handoff.zip
 test-results/
 playwright-report/
+
+# Local notes and design references, not part of the site
+HANDOFF.md
+README.md
+data/
+design/
+docs/
+prototype/
