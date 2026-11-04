@@ -1,8 +1,16 @@
 import { CHAPTERS, GREETINGS } from './content.js';
 import { renderStory } from './story.js';
 import { runIntro } from './intro.js';
+import { createShelf } from './shelf.js';
 
-runIntro(document.getElementById('intro'), document.getElementById('word'), GREETINGS, {
+const $ = (id) => document.getElementById(id);
+
+runIntro($('intro'), $('word'), GREETINGS, {
   reducedMotion: matchMedia('(prefers-reduced-motion: reduce)').matches,
 });
-renderStory(document.getElementById('chapters'), CHAPTERS);
+renderStory($('chapters'), CHAPTERS);
+createShelf(
+  $('shelf-row'),
+  { lang: $('d-lang'), title: $('d-title'), repo: $('d-repo'), desc: $('d-desc'), link: $('d-link') },
+  { isPhone: () => innerWidth < 761 },
+);
