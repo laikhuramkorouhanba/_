@@ -90,8 +90,8 @@ test('Review Focus 3: story lines are fully visible once scrolled into view', as
   await page.goto(SITE);
   await expect(page.locator('#intro')).toHaveCount(0, { timeout: 5000 });
   const lines = page.locator('.story-row p');
-  await expect(lines).toHaveCount(8); // "A short story." + 7 chapters
-  for (let i = 0; i < 8; i++) {
+  await expect(lines).toHaveCount(7); // "A short story." + 6 chapters
+  for (let i = 0; i < (await lines.count()); i++) {
     const p = lines.nth(i);
     await p.evaluate((el) => el.scrollIntoView({ block: 'center', behavior: 'instant' }));
     // Opacity of the line itself, and the effective opacity through its

@@ -2,7 +2,6 @@ export const GREETINGS = ['Hello', 'Bonjour', 'नमस्ते', 'Khurumjari'
 export const CHAPTERS = [
   'Raised in Manipur, in the far north east of India.',
   'I took things apart long before I knew it was called engineering.',
-  'Chennai taught me to build.',
   'Today I study data science and AI for business at École Polytechnique and HEC Paris.',
   'In strategy teams, I built tools that turned reports from dozens of countries into one clear picture for leadership.',
   'I care how things look and feel. Typefaces, buildings, album covers.',

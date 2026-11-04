@@ -50,11 +50,10 @@ A one page site that presents Korouhanba for strategy, AI and product roles at e
 - **Copy, exactly:**
   1. Raised in Manipur, in the far north east of India.
   2. I took things apart long before I knew it was called engineering.
-  3. Chennai taught me to build.
-  4. Today I study data science and AI for business at École Polytechnique and HEC Paris.
-  5. In strategy teams, I built tools that turned reports from dozens of countries into one clear picture for leadership.
-  6. I care how things look and feel. Typefaces, buildings, album covers.
-  7. And the aim has always been the same: make the complicated feel effortless.
+  3. Today I study data science and AI for business at École Polytechnique and HEC Paris.
+  4. In strategy teams, I built tools that turned reports from dozens of countries into one clear picture for leadership.
+  5. I care how things look and feel. Typefaces, buildings, album covers.
+  6. And the aim has always been the same: make the complicated feel effortless.
 - Phones: full width, 72px gaps, 72px cue line.
 
 ### 6. The shelf (Work)
