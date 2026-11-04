@@ -1,9 +1,13 @@
+import '@fontsource/inter-tight/400.css';
+import '@fontsource/inter-tight/500.css';
+import '@fontsource/inter-tight/600.css';
 import { CHAPTERS, GREETINGS } from './content.js';
 import { renderStory } from './story.js';
 import { runIntro } from './intro.js';
 import { createShelf } from './shelf.js';
 import { drawGlobe } from './globe.js';
 import { initCursor } from './cursor.js';
+import { addAnalytics } from './analytics.js';
 
 const $ = (id) => document.getElementById(id);
 
@@ -25,3 +29,5 @@ function loop(now) {
   requestAnimationFrame(loop);
 }
 requestAnimationFrame(loop);
+
+addAnalytics(document.head, import.meta.env.VITE_GOATCOUNTER_CODE);

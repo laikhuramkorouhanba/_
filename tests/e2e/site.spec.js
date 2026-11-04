@@ -1,18 +1,19 @@
 import { test, expect } from '@playwright/test';
 
 const SITE = '/_/';
-const isGoogleFonts = (url) => /^https:\/\/fonts\.(googleapis|gstatic)\.com\//.test(url);
 const PHONE = { width: 390, height: 844 };
 
 test('loads under /_/ with no page errors and no failed requests', async ({ page }) => {
   const errors = [];
   const failed = [];
+  const offsite = [];
   page.on('pageerror', (e) => errors.push(e.message));
-  page.on('requestfailed', (r) => {
-    if (!isGoogleFonts(r.url())) failed.push(r.url() + ' ' + (r.failure() || {}).errorText);
+  page.on('request', (r) => {
+    if (!r.url().startsWith('http://localhost:4173/')) offsite.push(r.url());
   });
+  page.on('requestfailed', (r) => failed.push(r.url() + ' ' + (r.failure() || {}).errorText));
   page.on('response', (r) => {
-    if (r.status() >= 400 && !isGoogleFonts(r.url())) failed.push(r.url() + ' ' + r.status());
+    if (r.status() >= 400) failed.push(r.url() + ' ' + r.status());
   });
   await page.goto(SITE, { waitUntil: 'load' });
   // Let the intro run to completion and the animation loop tick.
@@ -20,6 +21,9 @@ test('loads under /_/ with no page errors and no failed requests', async ({ page
   await expect(page.locator('#shelf-row .slot')).toHaveCount(6);
   expect(errors).toEqual([]);
   expect(failed).toEqual([]);
+  // Fonts are self-hosted, so nothing is fetched from another host.
+  expect(offsite).toEqual([]);
+  expect(await page.evaluate(() => document.fonts.check('500 16px "Inter Tight"'))).toBe(true);
 });
 
 test('Review Focus 2: script and stylesheet URLs work under the /_/ subpath', async ({ page }) => {
@@ -30,7 +34,7 @@ test('Review Focus 2: script and stylesheet URLs work under the /_/ subpath', as
   ]);
   expect(urls.length).toBeGreaterThanOrEqual(2);
   for (const u of urls) {
-    expect(u.startsWith('/_/') || u.startsWith('https://fonts.'), u).toBe(true);
+    expect(u.startsWith('/_/'), u).toBe(true);
   }
   // The built bundle must actually be in use (not the dev /src/ paths).
   expect(urls.some((u) => u.startsWith('/_/assets/') && u.endsWith('.js'))).toBe(true);

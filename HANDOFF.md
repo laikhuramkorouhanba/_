@@ -98,9 +98,11 @@ A one page site that presents Korouhanba for strategy, AI and product roles at e
 - With reduced motion: no intro, no drift, no reveals, no cue loop. The globe and book turns may stay.
 - Text contrast is 4.5:1 or better on bg-000 (muted grey is 6.1:1).
 
-## Open items (confirm with Korouhanba before launch)
-1. **Repos on the shelf are placeholders.** `churn-streamlit` and `_` are known to be public. `document-extraction-rag` needs its visibility checked. `als-recommender` and `qrt-long-or-short` are guessed names. `murmur` may still be private. Replace these with his real public repos and URLs.
-2. **"Khurumjari"** (the Manipuri greeting) needs a spelling check. Should it also appear in Meetei Mayek script?
-3. **Visitor analytics:** he wants a free, quick-to-set-up option.
-4. **Design system out of date:** the Claude design system artifact still lists an orange accent and a mono font. The site uses neither. `design/tokens.json` here is correct.
-5. **Fonts:** Inter Tight comes from Google Fonts. Self-hosting it would make the site faster and keep it private.
+## Open items
+1. **Repos on the shelf are placeholders.** Kept as they are for now. `churn-streamlit` and `_` are known to be public. `document-extraction-rag` needs its visibility checked. `als-recommender` and `qrt-long-or-short` are guessed names. `murmur` may still be private. Replace these with his real public repos and URLs in `src/content.js` (`REPOS`).
+2. **Design system out of date:** the Claude design system artifact still lists an orange accent and a mono font. The site uses neither. `design/tokens.json` here is correct.
+
+## Settled
+- **"Khurumjari"** is spelled correctly. It stays in Latin script only.
+- **Fonts:** Inter Tight (400, 500, 600) is self-hosted from the `@fontsource/inter-tight` package and bundled by Vite. The page makes no requests to Google.
+- **Visitor analytics:** GoatCounter. It is free for personal sites, sets no cookies and needs no consent banner. The script loads only when the repo variable `GOATCOUNTER_CODE` is set (Settings › Secrets and variables › Actions › Variables). Its value is the site code chosen at goatcounter.com, for example `korouhanba` for `korouhanba.goatcounter.com`. Visits from localhost are not counted.
