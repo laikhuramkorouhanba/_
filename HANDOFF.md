@@ -105,4 +105,5 @@ A one page site that presents Korouhanba for strategy, AI and product roles at e
 ## Settled
 - **"Khurumjari"** is spelled correctly. It stays in Latin script only.
 - **Fonts:** Inter Tight (400, 500, 600) is self-hosted from the `@fontsource/inter-tight` package and bundled by Vite. The page makes no requests to Google.
-- **Visitor analytics:** GoatCounter. It is free for personal sites, sets no cookies and needs no consent banner. The script loads only when the repo variable `GOATCOUNTER_CODE` is set (Settings › Secrets and variables › Actions › Variables). Its value is the site code chosen at goatcounter.com, for example `korouhanba` for `korouhanba.goatcounter.com`. Visits from localhost are not counted.
+- **Visitor analytics:** GoatCounter. It is free for personal sites, sets no cookies and needs no consent banner. The script loads only when the repo variable `GOATCOUNTER_CODE` is set (Settings › Secrets and variables › Actions › Variables). It is set to `korouhanba`, so visits show at https://korouhanba.goatcounter.com. Visits from localhost are not counted.
+- **Tooling:** Vite 6 and Vitest 4, the newest versions that run on Node 20. Vite 8 and Vitest 5 need Node 22.12 or later.
