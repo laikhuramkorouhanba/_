@@ -111,6 +111,39 @@ test('Review Focus 3: story lines are fully visible once scrolled into view', as
   }
 });
 
+test.describe('name drift on scroll', () => {
+  const measure = async (page, width, height) => {
+    await page.setViewportSize({ width, height });
+    await page.goto(SITE);
+    await expect(page.locator('#intro')).toHaveCount(0, { timeout: 5000 });
+    await page.evaluate(() => document.fonts.ready);
+    const edges = async (y) => {
+      await page.evaluate((top) => window.scrollTo({ top, behavior: 'instant' }), y);
+      await page.waitForTimeout(150);
+      return page.evaluate(() => {
+        const r = document.createRange();
+        r.selectNodeContents(document.querySelector('.hero-name'));
+        const { left, right } = r.getBoundingClientRect();
+        return { left, right };
+      });
+    };
+    const start = await edges(0);
+    const near = await edges(100);
+    const settled = await edges(260);
+    return { rate: (start.left - near.left) / 100, settledRight: settled.right };
+  };
+
+  test('is strong everywhere, stronger on phones, and shows the full name on phones', async ({ page, browserName }) => {
+    test.skip(browserName === 'firefox', 'Firefox has no scroll-driven animation yet');
+    const phone = await measure(page, 390, 844);
+    const desktop = await measure(page, 1440, 900);
+    expect(desktop.rate).toBeGreaterThanOrEqual(1);
+    expect(phone.rate).toBeGreaterThan(desktop.rate);
+    expect(phone.rate).toBeLessThanOrEqual(1.5);
+    expect(phone.settledRight).toBeLessThanOrEqual(374.5);
+  });
+});
+
 test.describe('reduced motion', () => {
   test.use({ reducedMotion: 'reduce' });
 
