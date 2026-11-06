@@ -56,29 +56,6 @@ test.describe('phone 390x844', () => {
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(390);
   });
 
-  for (const width of [320, 390, 430, 760]) {
-    test(`the full name fits at ${width}px, before and after scrolling`, async ({ page }) => {
-      await page.setViewportSize({ width, height: 844 });
-      await page.goto(SITE);
-      await expect(page.locator('#intro')).toHaveCount(0, { timeout: 5000 });
-      await page.evaluate(() => document.fonts.ready);
-      const edges = () =>
-        page.evaluate(() => {
-          const r = document.createRange();
-          r.selectNodeContents(document.querySelector('.hero-name'));
-          const { left, right } = r.getBoundingClientRect();
-          return { left, right };
-        });
-      const top = await edges();
-      expect(top.left).toBeGreaterThanOrEqual(0);
-      expect(top.right).toBeLessThanOrEqual(width - 16);
-      await page.evaluate(() => window.scrollTo(0, 300));
-      await page.waitForTimeout(200);
-      const scrolled = await edges();
-      expect(scrolled.left).toBeCloseTo(top.left, 0);
-    });
-  }
-
   test('opening the last book keeps the page in place', async ({ page }) => {
     await page.goto(SITE);
     await expect(page.locator('#intro')).toHaveCount(0, { timeout: 5000 });

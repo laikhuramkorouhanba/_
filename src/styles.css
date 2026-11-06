@@ -35,7 +35,7 @@ header,section,footer{padding-left:16px !important;padding-right:16px !important
 .site-head a{display:inline-block;padding:10px 0}
 #top{padding-top:56px !important;padding-bottom:56px !important}
 .hero-row{flex-direction:column;align-items:flex-start !important;gap:40px !important;padding-bottom:40px !important}
-.hero-name{font-size:calc((100vw - 32px)/9.2) !important;animation:none}
+.hero-name{font-size:clamp(56px,19vw,96px) !important}
 #story{padding-top:24px !important;padding-bottom:48px !important}
 .story-row{grid-template-columns:1fr !important;padding-bottom:72px !important}
 .story-row>*{grid-column:1/-1 !important}
