@@ -13,10 +13,10 @@ describe('content', () => {
     expect(GREETINGS).toEqual(['Hello', 'Bonjour', 'नमस्ते', 'Khurumjari', 'こんにちは', 'Hola', 'Ciao', 'Hello']);
   });
 
-  it('has six books', () => {
-    expect(REPOS.length).toBe(6);
-    expect(BOOK_LOOKS.length).toBe(6);
-    expect(COVER_FIGURES.length).toBe(6);
+  it('has five books', () => {
+    expect(REPOS.length).toBe(5);
+    expect(BOOK_LOOKS.length).toBe(5);
+    expect(COVER_FIGURES.length).toBe(5);
   });
 
   it('has no em dashes in the copy', () => {

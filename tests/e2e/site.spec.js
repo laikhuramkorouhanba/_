@@ -18,7 +18,7 @@ test('loads under /_/ with no page errors and no failed requests', async ({ page
   await page.goto(SITE, { waitUntil: 'load' });
   // Let the intro run to completion and the animation loop tick.
   await expect(page.locator('#intro')).toHaveCount(0, { timeout: 5000 });
-  await expect(page.locator('#shelf-row .slot')).toHaveCount(6);
+  await expect(page.locator('#shelf-row .slot')).toHaveCount(5);
   expect(errors).toEqual([]);
   expect(failed).toEqual([]);
   // Fonts are self-hosted, so nothing is fetched from another host.
@@ -60,7 +60,7 @@ test.describe('phone 390x844', () => {
     await page.goto(SITE);
     await expect(page.locator('#intro')).toHaveCount(0, { timeout: 5000 });
     await page.locator('#shelf-row .slot').last().locator('button').click();
-    await expect(page.locator('#d-title')).toHaveText('This Website');
+    await expect(page.locator('#d-title')).toHaveText('Long or Short');
     // Wait for the turn and the centring scroll that follows it.
     await page.waitForTimeout(1500);
     const m = await page.evaluate(() => {

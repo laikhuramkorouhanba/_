@@ -32,11 +32,11 @@ describe('createShelf', () => {
     vi.useRealTimers();
   });
 
-  it('renders six books with book 1 open', () => {
+  it('renders five books with book 1 open', () => {
     const { slots, btn, detail } = setup();
-    expect(slots.length).toBe(6);
+    expect(slots.length).toBe(5);
     const pressed = slots.map((_, i) => btn(i).getAttribute('aria-pressed'));
-    expect(pressed).toEqual(['true', 'false', 'false', 'false', 'false', 'false']);
+    expect(pressed).toEqual(['true', 'false', 'false', 'false', 'false']);
     expect(btn(0).style.transform).toBe('rotateY(80deg)');
     expect(slots[0].style.width).toBe('317px');
     expect(detail.title.textContent).toBe('Churn');
